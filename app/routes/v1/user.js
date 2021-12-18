@@ -33,6 +33,38 @@ router.get('/',function(req,res){
       res.json(users)
     });
 });
+
+router.get('/:id',function(req,res){
+  var Userid=req.params.id;
+  UserModel
+    .findById(Userid,function(err,user){
+      res.json(user);
+    });
+});
+
+router.put('/:id',function(req,res){
+  console.log("put");
+  var Userid=req.params.id;
+
+  UserModel
+    .findById(Userid,function(err,user){
+      if(err){
+        res.send(err);
+      }else{
+        user.name=req.body.name;
+        user.screen_name=req.body.screen_name;
+        user.bio=req.body.bio;
+        user.save(function(err){
+          if(err){
+            res.send(err);
+          }else{
+            res.json({message:"success!"});
+          }
+        });
+      }
+    });
+});
+
 router.get('/test',function(req,res){
   console.log("get /test");
   res.json({
