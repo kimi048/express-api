@@ -24,6 +24,29 @@ router.post('/',function(req,res){
     });
 });
 
+router.get("/",function(req,res){
+  ArticleModel
+    .find()
+    .then(function(articles){
+      res.json(articles);
+    });
+});
+
+router.get("/:id",function(req,res){
+  var Articleid=req.params.id;
+  ArticleModel.findById(Articleid,function(err,article){
+    res.json(article);
+  });
+});
+
+router.delete("/:id",function(req,res){
+  var Articleid=req.params.id;
+  ArticleModel.deleteOne({_id:Articleid})
+    .then(function(){
+      res.json({message:"Success!!"});
+    });
+});
+
 //routerをモジュールとして扱う準備
 module.exports = router;
 router.get('/test',function(req,res){
