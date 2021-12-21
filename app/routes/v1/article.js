@@ -48,7 +48,7 @@ router.delete("/:id",function(req,res){
 });
 
 //routerをモジュールとして扱う準備
-module.exports = router;
+
 router.get('/test',function(req,res){
   console.log("articles get /test");
   res.json({

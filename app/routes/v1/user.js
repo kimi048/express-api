@@ -64,6 +64,13 @@ router.put('/:id',function(req,res){
       }
     });
 });
+router.delete('/:id',function(req,res){
+  var UserId = req.params.id;
+  UserModel.deleteOne({_id:UserId})
+      .then(function(){
+      res.json({message:'Success!!'});
+  });
+});
 
 router.get('/test',function(req,res){
   console.log("get /test");
